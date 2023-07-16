@@ -1,0 +1,79 @@
+
+
+Database scafolding command: Scaffold-DbContext "Data Source=.;Initial Catalog=BusTicket;Integrated Security=True;TrustServerCertificate=True " Microsoft.EntityFrameworkCore.SqlServer -o Models
+----------------------------
+DB Create
+
+CREATE TABLE [Otobus] (
+  [OtobusId] int PRIMARY KEY IDENTITY(1, 1),
+  [OtobusModel] nvarchar(100) NOT NULL,
+  [SoforIsmi] nvarchar(100) NOT NULL,
+  [KoltukSayisi] int NOT NULL,
+  [WC] bit NOT NULL,
+  [TV] bit NOT NULL
+)
+GO
+
+CREATE TABLE [Yolcu] (
+  [YolcuId] int PRIMARY KEY IDENTITY(1, 1),
+  [Ad] nvarchar(100) NOT NULL,
+  [Soyad] nvarchar(100) NOT NULL,
+  [DogumTarihi] date NOT NULL,
+  [Cinsiyet] nvarchar(10) NOT NULL
+)
+GO
+
+CREATE TABLE [Sefer] (
+  [SeferId] int PRIMARY KEY IDENTITY(1, 1),
+  [Guzergah] nvarchar(100) NOT NULL,
+  [TahminiSure] decimal(2,1) NOT NULL,
+  [OtobusId] int NOT NULL
+)
+GO
+
+CREATE TABLE [SeferYolcu] (
+  [SeferId] int PRIMARY KEY IDENTITY(1, 1),
+  [YolcuId] int NOT NULL
+)
+GO
+
+ALTER TABLE [Sefer] ADD FOREIGN KEY ([OtobusId]) REFERENCES [Otobus] ([OtobusId])
+GO
+
+ALTER TABLE [SeferYolcu] ADD FOREIGN KEY ([SeferId]) REFERENCES [Sefer] ([SeferId])
+GO
+
+ALTER TABLE [SeferYolcu] ADD FOREIGN KEY ([YolcuId]) REFERENCES [Yolcu] ([YolcuId])
+GO
+
+-------------------------------
+Insert Command
+
+
+INSERT INTO [dbo].[Otobus]
+           ([OtobusModel]
+           ,[SoforIsmi]
+           ,[KoltukSayisi]
+           ,[WC]
+           ,[TV])
+     VALUES
+           ('Neoplan'
+           ,'Taner Aktepe'
+           ,20
+           ,1
+           ,1)
+
+
+
+INSERT INTO [dbo].[Sefer]
+           ([Guzergah]
+           ,[TahminiSure]
+           ,[OtobusId])
+     VALUES
+           ('Ýzmir-Ankara'
+           ,8
+           ,1)
+
+
+
+

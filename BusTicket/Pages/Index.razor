@@ -1,22 +1,631 @@
 ﻿@page "/"
+@using BusTicket.Models;
 
 <PageTitle>Index</PageTitle>
 
 
-<RadzenRow  class="rz-mt-12">
-    <RadzenColumn Size="4" class="rz-color-on-info-lighter rz-p-2">
-        <RadzenCard Class="rz-my-12 rz-mx-auto" Style="max-width: 420px">
-            Bilet Sekmesi
-        </RadzenCard>
-    </RadzenColumn>
+<RadzenRow class="rz-mt-12" style="background-color:#fafbff;border-radius: 12px;">
+    <RadzenTemplateForm Data="@yolcu" Submit="@((Yolcu args) => { Submit(args); })">
+        <RadzenRow Gap="2rem" Class="rz-p-0 rz-p-lg-4" Style="width:1200px;">
+            <RadzenColumn Size="12" SizeMD="4">
+                <RadzenStack>
+                    <RadzenFieldset Text="Yolcu Bilgisi">
+                        <RadzenStack Gap="1rem">
+                            <RadzenRow AlignItems="AlignItems.Center">
+                                <RadzenColumn Size="12" SizeMD="4">
+                                    <RadzenLabel Text="Ad" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeMD="8">
+                                    <RadzenTextBox Style="width: 100%;" Name="Ad" @bind-Value="yolcu.Ad" />
+                                </RadzenColumn>
+                            </RadzenRow>
+
+                            <RadzenRow AlignItems="AlignItems.Center">
+                                <RadzenColumn Size="12" SizeMD="4">
+                                    <RadzenLabel Text="Soyad" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeMD="8">
+                                    <RadzenTextBox Style="width: 100%;" Name="Soyad" @bind-Value="yolcu.Soyad" />
+                                </RadzenColumn>
+                            </RadzenRow>
 
 
+                            <RadzenRow AlignItems="AlignItems.Center">
+                                <RadzenColumn Size="12" SizeMD="4">
+                                    <RadzenLabel Text="Doğum Tarihi" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeMD="8">
+                                    <RadzenDatePicker Style="width: 100%;" Name="ExpiryDate" @bind-Value="yolcu.DogumTarihi" DateFormat="dd.MM.yyyy" />
+                                </RadzenColumn>
+                            </RadzenRow>
 
-    <RadzenColumn Size="8" class=" rz-color-on-info-lighter rz-p-2">
-        <RadzenCard Class="rz-my-12 rz-mx-auto rz-shadow-3 rz-border-radius-4" Style="max-width: 700px;height:350px">
-            Bilet Sekmesi
-        </RadzenCard>
-    </RadzenColumn>
+
+                            <RadzenRow AlignItems="AlignItems.Center">
+                                <RadzenColumn Size="12" SizeMD="4">
+                                    <RadzenLabel Text="Cinsiyet" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeMD="8">
+                                    <RadzenRadioButtonList @bind-Value=@cinsiyet TValue="int">
+                                        <Items>
+                                            <RadzenRadioButtonListItem Text="Erkek" Value="1" />
+                                            <RadzenRadioButtonListItem Text="Kadın" Value="2" />
+                                           
+                                        </Items>
+                                    </RadzenRadioButtonList>
+                                </RadzenColumn>
+                            </RadzenRow>
+
+                        </RadzenStack>
+
+
+                    </RadzenFieldset>
+
+                </RadzenStack>
+            </RadzenColumn>
+            <RadzenColumn Size="12" SizeMD="8">
+                <RadzenStack>
+                    <RadzenFieldset Text="Koltuk Bilgisi">
+                        <RadzenStack Gap="1rem">
+
+                            <?xml version="1.0" encoding="utf-8" ?>
+                            <svg viewBox="0 0 610 221" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient x1="943.9407" y1="458.65101" x2="1036.72402" y2="293.25466" gradientUnits="userSpaceOnUse" id="color-3" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="483.75" x2="959" y2="552.75" gradientUnits="userSpaceOnUse" id="color-1">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="523.25" x2="959" y2="592.25" gradientUnits="userSpaceOnUse" id="color-2">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="943.9407" y1="458.65101" x2="1036.72402" y2="293.25466" gradientUnits="userSpaceOnUse" id="gradient-1" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="483.75" x2="959" y2="552.75" gradientUnits="userSpaceOnUse" id="gradient-2">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="523.25" x2="959" y2="592.25" gradientUnits="userSpaceOnUse" id="gradient-3">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="943.9407" y1="458.65101" x2="1036.72402" y2="293.25466" gradientUnits="userSpaceOnUse" id="gradient-4" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="483.75" x2="959" y2="552.75" gradientUnits="userSpaceOnUse" id="gradient-5">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="523.25" x2="959" y2="592.25" gradientUnits="userSpaceOnUse" id="gradient-6">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="943.9407" y1="458.65101" x2="1036.72402" y2="293.25466" gradientUnits="userSpaceOnUse" id="gradient-7" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="483.75" x2="959" y2="552.75" gradientUnits="userSpaceOnUse" id="gradient-8">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="523.25" x2="959" y2="592.25" gradientUnits="userSpaceOnUse" id="gradient-9">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="943.9407" y1="458.65101" x2="1036.72402" y2="293.25466" gradientUnits="userSpaceOnUse" id="gradient-10" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="483.75" x2="959" y2="552.75" gradientUnits="userSpaceOnUse" id="gradient-11">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="523.25" x2="959" y2="592.25" gradientUnits="userSpaceOnUse" id="gradient-12">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="943.9407" y1="458.65101" x2="1036.72402" y2="293.25466" gradientUnits="userSpaceOnUse" id="gradient-13" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="483.75" x2="959" y2="552.75" gradientUnits="userSpaceOnUse" id="gradient-14">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="523.25" x2="959" y2="592.25" gradientUnits="userSpaceOnUse" id="gradient-15">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="943.9407" y1="458.65101" x2="1036.72402" y2="293.25466" gradientUnits="userSpaceOnUse" id="gradient-16" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="483.75" x2="959" y2="552.75" gradientUnits="userSpaceOnUse" id="gradient-17">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="523.25" x2="959" y2="592.25" gradientUnits="userSpaceOnUse" id="gradient-18">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="943.9407" y1="458.65101" x2="1036.72402" y2="293.25466" gradientUnits="userSpaceOnUse" id="gradient-19" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="483.75" x2="959" y2="552.75" gradientUnits="userSpaceOnUse" id="gradient-20">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="523.25" x2="959" y2="592.25" gradientUnits="userSpaceOnUse" id="gradient-21">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="943.9407" y1="458.65101" x2="1036.72402" y2="293.25466" gradientUnits="userSpaceOnUse" id="gradient-22" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="483.75" x2="959" y2="552.75" gradientUnits="userSpaceOnUse" id="gradient-23">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="523.25" x2="959" y2="592.25" gradientUnits="userSpaceOnUse" id="gradient-24">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="943.9407" y1="458.65101" x2="1036.72402" y2="293.25466" gradientUnits="userSpaceOnUse" id="gradient-25" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="483.75" x2="959" y2="552.75" gradientUnits="userSpaceOnUse" id="gradient-26">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="523.25" x2="959" y2="592.25" gradientUnits="userSpaceOnUse" id="gradient-27">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="943.9407" y1="458.65101" x2="1036.72402" y2="293.25466" gradientUnits="userSpaceOnUse" id="gradient-28" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="483.75" x2="959" y2="552.75" gradientUnits="userSpaceOnUse" id="gradient-29">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="523.25" x2="959" y2="592.25" gradientUnits="userSpaceOnUse" id="gradient-30">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="943.9407" y1="458.65101" x2="1036.72402" y2="293.25466" gradientUnits="userSpaceOnUse" id="gradient-31" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="483.75" x2="959" y2="552.75" gradientUnits="userSpaceOnUse" id="gradient-32">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="523.25" x2="959" y2="592.25" gradientUnits="userSpaceOnUse" id="gradient-33">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="943.9407" y1="458.65101" x2="1036.72402" y2="293.25466" gradientUnits="userSpaceOnUse" id="gradient-34" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="483.75" x2="959" y2="552.75" gradientUnits="userSpaceOnUse" id="gradient-35">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="523.25" x2="959" y2="592.25" gradientUnits="userSpaceOnUse" id="gradient-36">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="943.9407" y1="458.65101" x2="1036.72402" y2="293.25466" gradientUnits="userSpaceOnUse" id="gradient-37" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="483.75" x2="959" y2="552.75" gradientUnits="userSpaceOnUse" id="gradient-38">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="523.25" x2="959" y2="592.25" gradientUnits="userSpaceOnUse" id="gradient-39">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="943.9407" y1="458.65101" x2="1036.72402" y2="293.25466" gradientUnits="userSpaceOnUse" id="gradient-40" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="483.75" x2="959" y2="552.75" gradientUnits="userSpaceOnUse" id="gradient-41">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="523.25" x2="959" y2="592.25" gradientUnits="userSpaceOnUse" id="gradient-42">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="943.9407" y1="458.65101" x2="1036.72402" y2="293.25466" gradientUnits="userSpaceOnUse" id="gradient-43" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="483.75" x2="959" y2="552.75" gradientUnits="userSpaceOnUse" id="gradient-44">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="523.25" x2="959" y2="592.25" gradientUnits="userSpaceOnUse" id="gradient-45">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="943.9407" y1="458.65101" x2="1036.72402" y2="293.25466" gradientUnits="userSpaceOnUse" id="gradient-46" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="483.75" x2="959" y2="552.75" gradientUnits="userSpaceOnUse" id="gradient-47">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="523.25" x2="959" y2="592.25" gradientUnits="userSpaceOnUse" id="gradient-48">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="943.9407" y1="458.65101" x2="1036.72402" y2="293.25466" gradientUnits="userSpaceOnUse" id="gradient-49" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="483.75" x2="959" y2="552.75" gradientUnits="userSpaceOnUse" id="gradient-50">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="523.25" x2="959" y2="592.25" gradientUnits="userSpaceOnUse" id="gradient-51">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="943.9407" y1="458.65101" x2="1036.72402" y2="293.25466" gradientUnits="userSpaceOnUse" id="gradient-52" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="483.75" x2="959" y2="552.75" gradientUnits="userSpaceOnUse" id="gradient-53">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="523.25" x2="959" y2="592.25" gradientUnits="userSpaceOnUse" id="gradient-54">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="943.9407" y1="458.65101" x2="1036.72402" y2="293.25466" gradientUnits="userSpaceOnUse" id="gradient-55" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="483.75" x2="959" y2="552.75" gradientUnits="userSpaceOnUse" id="gradient-56">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="523.25" x2="959" y2="592.25" gradientUnits="userSpaceOnUse" id="gradient-57">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="943.9407" y1="458.65101" x2="1036.72402" y2="293.25466" gradientUnits="userSpaceOnUse" id="gradient-58" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="483.75" x2="959" y2="552.75" gradientUnits="userSpaceOnUse" id="gradient-59">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="523.25" x2="959" y2="592.25" gradientUnits="userSpaceOnUse" id="gradient-60">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="943.9407" y1="458.65101" x2="1036.72402" y2="293.25466" gradientUnits="userSpaceOnUse" id="gradient-61" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="483.75" x2="959" y2="552.75" gradientUnits="userSpaceOnUse" id="gradient-62">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="523.25" x2="959" y2="592.25" gradientUnits="userSpaceOnUse" id="gradient-63">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="943.9407" y1="458.65101" x2="1036.72402" y2="293.25466" gradientUnits="userSpaceOnUse" id="gradient-64" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="483.75" x2="959" y2="552.75" gradientUnits="userSpaceOnUse" id="gradient-65">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="523.25" x2="959" y2="592.25" gradientUnits="userSpaceOnUse" id="gradient-66">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="943.9407" y1="458.65101" x2="1036.72402" y2="293.25466" gradientUnits="userSpaceOnUse" id="gradient-67" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="483.75" x2="959" y2="552.75" gradientUnits="userSpaceOnUse" id="gradient-68">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="523.25" x2="959" y2="592.25" gradientUnits="userSpaceOnUse" id="gradient-69">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="943.9407" y1="458.65101" x2="1036.72402" y2="293.25466" gradientUnits="userSpaceOnUse" id="gradient-70" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="483.75" x2="959" y2="552.75" gradientUnits="userSpaceOnUse" id="gradient-71">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="523.25" x2="959" y2="592.25" gradientUnits="userSpaceOnUse" id="gradient-72">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="943.9407" y1="458.65101" x2="1036.72402" y2="293.25466" gradientUnits="userSpaceOnUse" id="gradient-73" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="483.75" x2="959" y2="552.75" gradientUnits="userSpaceOnUse" id="gradient-74">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="523.25" x2="959" y2="592.25" gradientUnits="userSpaceOnUse" id="gradient-75">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="943.9407" y1="458.65101" x2="1036.72402" y2="293.25466" gradientUnits="userSpaceOnUse" id="gradient-76" gradientTransform="matrix(1, 0, 0, 1, 0, 0)">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="483.75" x2="959" y2="552.75" gradientUnits="userSpaceOnUse" id="gradient-77">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                    <linearGradient x1="836" y1="523.25" x2="959" y2="592.25" gradientUnits="userSpaceOnUse" id="gradient-78">
+                                        <stop offset="0" stop-color="#cfcfcf" />
+                                        <stop offset="1" stop-color="#000000" />
+                                    </linearGradient>
+                                </defs>
+                                <g fill="none" fill-rule="nonzero" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal" transform="matrix(1, 0, 0, 1, -324.1283264160156, -495.296875)">
+                                    <g transform="matrix(1, 0, 0, 1, -338.879913, 225.3871)">
+                                        <g id="stage">
+                                            <g id="layer1 1" fill-opacity="0" fill="#000000">
+                                                <path d="M709,475.5c-16.5,0 -33,-16.5 -33,-33v-129c0,-16.5 16.5,-33 33,-33h518c16,0 32,16 32,32v134c0,14.5 -14.5,29 -29,29z" id="Path 1" />
+                                                <path d="M 710.792 436.791 C 710.792 425.024 720.331 415.485 732.099 415.485 C 743.866 415.485 753.405 425.024 753.405 436.791 C 753.405 448.559 743.866 458.098 732.099 458.098 C 720.331 458.098 710.792 448.559 710.792 436.791 Z" id="Path 1" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                <path d="M769,475.5l20,-63" id="Path 1" />
+                                                <path d="M705.12104,280.79723v17.30508" id="Path 1" />
+                                                <path d="M705.12104,297h64.90978" id="Path 1" />
+                                                <path d="M770.03082,297v-16.03317" id="Path 1" />
+                                                <path d="M689.28868,467.87425v-178.87448" id="Path 1" />
+                                                <path d="M788.65896,413.57427v-59.75617" id="Path 1" />
+                                            </g>
+                                            <g id="Layer2 1" style="" transform="matrix(0.672226, 0, 0, 0.718839, 380.053528, 132.863342)">
+                                                <g transform="matrix(1, 0, 0, 1, -148.61911, -146.764923)">
+                                                    <title>koltuk-1</title>
+                                                    <path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="Path 1" fill="url(#color-3)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="Path 1" fill-opacity="0" fill="#000000" />
+                                                    <path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="Path 1" fill="url(#color-1)" />
+                                                    <path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="Path 1" fill="url(#color-2)" />
+                                                </g>
+                                                <g transform="matrix(1, 0, 0, 1, -81.357788, -146.460068)">
+                                                    <title>koltuk-2</title>
+                                                    <path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="path-1" fill="url(#gradient-1)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="path-1" fill-opacity="0" fill="#000000" />
+                                                    <path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-1" fill="url(#gradient-2)" />
+                                                    <path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-1" fill="url(#gradient-3)" />
+                                                </g>
+                                                <g transform="matrix(1, 0, 0, 1, -12.738304, -148.28035)">
+                                                    <title>koltuk-3</title>
+                                                    <path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="path-2" fill="url(#gradient-4)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="path-2" fill-opacity="0" fill="#000000" />
+                                                    <path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-2" fill="url(#gradient-5)" />
+                                                    <path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-2" fill="url(#gradient-6)" />
+                                                </g>
+                                                <g transform="matrix(1, 0, 0, 1, 54.522682, -147.975342)">
+                                                    <title>koltuk-4</title>
+                                                    <path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="path-3" fill="url(#gradient-7)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="path-3" fill-opacity="0" fill="#000000" />
+                                                    <path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-3" fill="url(#gradient-8)" />
+                                                    <path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-3" fill="url(#gradient-9)" />
+                                                </g>
+                                                <g transform="matrix(1, 0, 0, 1, 118.046501, -149.392197)">
+                                                    <title>koltuk-5</title>
+                                                    <path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="path-4" fill="url(#gradient-10)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="path-4" fill-opacity="0" fill="#000000" />
+                                                    <path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-4" fill="url(#gradient-11)" />
+                                                    <path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-4" fill="url(#gradient-12)" />
+                                                </g>
+                                                <g transform="matrix(1, 0, 0, 1, 185.307526, -149.087204)">
+                                                    <title>koltuk-6</title>
+                                                    <path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="path-5" fill="url(#gradient-13)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="path-5" fill-opacity="0" fill="#000000" />
+                                                    <path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-5" fill="url(#gradient-14)" />
+                                                    <path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-5" fill="url(#gradient-15)" />
+                                                </g>
+                                                <g transform="matrix(1, 0, 0, 1, 248.831329, -150.504059)">
+                                                    <title>koltuk-7</title>
+                                                    <path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="path-6" fill="url(#gradient-16)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="path-6" fill-opacity="0" fill="#000000" />
+                                                    <path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-6" fill="url(#gradient-17)" />
+                                                    <path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-6" fill="url(#gradient-18)" />
+                                                </g>
+                                                <g transform="matrix(1, 0, 0, 1, 316.092316, -150.199066)">
+                                                    <title>koltuk-8</title>
+                                                    <path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="path-7" fill="url(#gradient-19)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="path-7" fill-opacity="0" fill="#000000" />
+                                                    <path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-7" fill="url(#gradient-20)" />
+                                                    <path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-7" fill="url(#gradient-21)" />
+                                                </g>
+                                                <g transform="matrix(1, 0, 0, 1, 383.522766, -149.2397)">
+                                                    <title>koltuk-9</title>
+                                                    <path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="path-8" fill="url(#gradient-22)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="path-8" fill-opacity="0" fill="#000000" />
+                                                    <path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-8" fill="url(#gradient-23)" />
+                                                    <path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-8" fill="url(#gradient-24)" />
+                                                </g>
+                                                <g transform="matrix(1, 0, 0, 1, -148.873642, -203.115479)">
+                                                    <title>koltuk-10</title>
+                                                    <path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="path-9" fill="url(#gradient-25)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="path-9" fill-opacity="0" fill="#000000" />
+                                                    <path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-9" fill="url(#gradient-26)" />
+                                                    <path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-9" fill="url(#gradient-27)" />
+                                                </g>
+                                                <g transform="matrix(1, 0, 0, 1, -81.612648, -202.810471)">
+                                                    <title>koltuk-11</title>
+                                                    <path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="path-10" fill="url(#gradient-28)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="path-10" fill-opacity="0" fill="#000000" />
+                                                    <path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-10" fill="url(#gradient-29)" />
+                                                    <path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-10" fill="url(#gradient-30)" />
+                                                </g>
+                                                <g transform="matrix(1, 0, 0, 1, -12.992651, -204.630478)">
+                                                    <title>koltuk-12</title>
+                                                    <path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="path-11" fill="url(#gradient-31)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="path-11" fill-opacity="0" fill="#000000" />
+                                                    <path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-11" fill="url(#gradient-32)" />
+                                                    <path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-11" fill="url(#gradient-33)" />
+                                                </g>
+                                                <g transform="matrix(1, 0, 0, 1, 54.268353, -204.325485)">
+                                                    <title>koltuk-13</title>
+                                                    <path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="path-12" fill="url(#gradient-34)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="path-12" fill-opacity="0" fill="#000000" />
+                                                    <path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-12" fill="url(#gradient-35)" />
+                                                    <path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-12" fill="url(#gradient-36)" />
+                                                </g>
+                                                <g transform="matrix(1, 0, 0, 1, 117.792366, -205.742477)">
+                                                    <title>koltuk-14</title>
+                                                    <path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="path-13" fill="url(#gradient-37)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="path-13" fill-opacity="0" fill="#000000" />
+                                                    <path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-13" fill="url(#gradient-38)" />
+                                                    <path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-13" fill="url(#gradient-39)" />
+                                                </g>
+                                                <g transform="matrix(1, 0, 0, 1, 185.05336, -205.437485)">
+                                                    <title>koltuk-15</title>
+                                                    <path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="path-14" fill="url(#gradient-40)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="path-14" fill-opacity="0" fill="#000000" />
+                                                    <path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-14" fill="url(#gradient-41)" />
+                                                    <path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-14" fill="url(#gradient-42)" />
+                                                </g>
+                                                <g transform="matrix(1, 0, 0, 1, 248.577377, -206.854477)">
+                                                    <title>koltuk-16</title>
+                                                    <path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="path-15" fill="url(#gradient-43)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="path-15" fill-opacity="0" fill="#000000" />
+                                                    <path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-15" fill="url(#gradient-44)" />
+                                                    <path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-15" fill="url(#gradient-45)" />
+                                                </g>
+                                                <g transform="matrix(1, 0, 0, 1, 315.838348, -206.549484)">
+                                                    <title>koltuk-17</title>
+                                                    <path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="path-16" fill="url(#gradient-46)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="path-16" fill-opacity="0" fill="#000000" />
+                                                    <path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-16" fill="url(#gradient-47)" />
+                                                    <path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-16" fill="url(#gradient-48)" />
+                                                </g>
+                                                <g transform="matrix(1, 0, 0, 1, 383.268372, -205.589478)">
+                                                    <title>koltuk-18</title>
+                                                    <path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="path-17" fill="url(#gradient-49)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="path-17" fill-opacity="0" fill="#000000" />
+                                                    <path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-17" fill="url(#gradient-50)" />
+                                                    <path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-17" fill="url(#gradient-51)" />
+                                                </g>
+                                                <g transform="matrix(1, 0, 0, 1, -145.306778, -10.764469)">
+                                                    <title>koltuk-19</title>
+                                                    <path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="path-18" fill="url(#gradient-52)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="path-18" fill-opacity="0" fill="#000000" />
+                                                    <path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-18" fill="url(#gradient-53)" />
+                                                    <path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-18" fill="url(#gradient-54)" />
+                                                </g>
+                                                <g transform="matrix(1, 0, 0, 1, -78.045784, -10.459476)">
+                                                    <title>koltuk-20</title>
+                                                    <path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="path-19" fill="url(#gradient-55)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="path-19" fill-opacity="0" fill="#000000" />
+                                                    <path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-19" fill="url(#gradient-56)" />
+                                                    <path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-19" fill="url(#gradient-57)" />
+                                                </g>
+                                                <g transform="matrix(1, 0, 0, 1, -9.425785, -12.279469)">
+                                                    <title>koltuk-21</title>
+                                                    <path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="path-20" fill="url(#gradient-58)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="path-20" fill-opacity="0" fill="#000000" />
+                                                    <path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-20" fill="url(#gradient-59)" />
+                                                    <path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-20" fill="url(#gradient-60)" />
+                                                </g>
+                                                <g transform="matrix(1, 0, 0, 1, 57.835232, -11.974478)">
+                                                    <title>koltuk-22</title>
+                                                    <path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="path-21" fill="url(#gradient-61)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="path-21" fill-opacity="0" fill="#000000" />
+                                                    <path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-21" fill="url(#gradient-62)" />
+                                                    <path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-21" fill="url(#gradient-63)" />
+                                                </g>
+                                                <g transform="matrix(1, 0, 0, 1, 121.359215, -13.391468)">
+                                                    <title>koltuk-23</title>
+                                                    <path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="path-22" fill="url(#gradient-64)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="path-22" fill-opacity="0" fill="#000000" />
+                                                    <path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-22" fill="url(#gradient-65)" />
+                                                    <path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-22" fill="url(#gradient-66)" />
+                                                </g>
+                                                <g transform="matrix(1, 0, 0, 1, 188.620209, -13.086475)">
+                                                    <title>koltuk-24</title>
+                                                    <path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="path-23" fill="url(#gradient-67)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="path-23" fill-opacity="0" fill="#000000" />
+                                                    <path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-23" fill="url(#gradient-68)" />
+                                                    <path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-23" fill="url(#gradient-69)" />
+                                                </g>
+                                                <g transform="matrix(1, 0, 0, 1, 252.143219, -14.503468)">
+                                                    <title>koltuk-25</title>
+                                                    <path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="path-24" fill="url(#gradient-70)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="path-24" fill-opacity="0" fill="#000000" />
+                                                    <path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-24" fill="url(#gradient-71)" />
+                                                    <path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-24" fill="url(#gradient-72)" />
+                                                </g>
+                                                <g transform="matrix(1, 0, 0, 1, 319.404205, -14.198477)">
+                                                    <title>koltuk-26</title>
+                                                    <path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="path-25" fill="url(#gradient-73)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="path-25" fill-opacity="0" fill="#000000" />
+                                                    <path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-25" fill="url(#gradient-74)" />
+                                                    <path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-25" fill="url(#gradient-75)" />
+                                                </g>
+                                                <g transform="matrix(1, 0, 0, 1, 386.835236, -13.239475)">
+                                                    <title>koltuk-27</title>
+                                                    <path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="path-26" fill="url(#gradient-76)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+                                                    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="path-26" fill-opacity="0" fill="#000000" />
+                                                    <path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-26" fill="url(#gradient-77)" />
+                                                    <path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="path-26" fill="url(#gradient-78)" />
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                                <line style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" x1="69.819" y1="187.532" x2="69.819" y2="145.972" />
+                                <line style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" x1="69.819" y1="166.752" x2="89.8" y2="166.752" />
+                            </svg>
+
+
+                        </RadzenStack>
+                    </RadzenFieldset>
+                    <RadzenFieldset Text="Bilet Bilgisi">
+                        <RadzenStack Gap="1rem">
+                           
+                                <RadzenCard Class="rz-my-2 rz-mx-auto rz-shadow-3 rz-border-radius-4" Style="width: 700px;height:300px">
+                                    Bilet Sekmesi
+                                </RadzenCard>
+                            
+                        </RadzenStack>
+                    </RadzenFieldset>
+                </RadzenStack>
+            </RadzenColumn>
+        </RadzenRow>
+        <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Center" Gap="1rem" Class="rz-mt-8 rz-mb-4">
+            <RadzenButton ButtonType="ButtonType.Submit" Size="ButtonSize.Large" Icon="save" Text="Save" />
+            <RadzenButton ButtonStyle="ButtonStyle.Light" Variant="Variant.Flat" Size="ButtonSize.Large" Icon="cancel" Text="Cancel" Click="@Cancel" />
+        </RadzenStack>
+    </RadzenTemplateForm>
 
 </RadzenRow>
 
@@ -24,5 +633,26 @@
 
 
 @code {
-    string text = "Hi";
+    int cinsiyet;
+
+    IEnumerable<Yolcu>? yolcus;
+    Yolcu? yolcu = new Yolcu()
+    {
+            DogumTarihi = DateTime.Parse("16/07/2023"),
+    };
+
+    string? ad;
+    string? soyad;
+
+    void Submit(Yolcu arg)
+    {
+        
+        //
+    }
+
+    void Cancel()
+    {
+        //
+    }
+
 }
