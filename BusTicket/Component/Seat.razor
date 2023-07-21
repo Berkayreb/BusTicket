@@ -1,0 +1,35 @@
+﻿@using BusTicket.Models;
+@using Microsoft.AspNetCore.Components;
+
+
+<title>koltuk-@seatNumber</title>
+<a href="" @onclick="HandleSeatClick" @onclick:preventDefault>
+    <path d="M828,462.12425c-2.76142,0 -5,-2.23858 -5,-5v-27.87425c0,-2.76142 2.23858,-5 5,-5h39c2.76142,0 5,2.23858 5,5v27.87425c0,2.76142 -2.23858,5 -5,5z" id="path-18" fill-opacity="1" fill="@seatColor" /></a>
+<path d="M 872 458.651 C 872 462.364 868.388 465.374 863.932 465.374 C 859.476 465.374 855.864 462.364 855.864 458.651 L 855.864 427.723 C 855.864 424.01 859.476 421 863.932 421 C 868.388 421 872 424.01 872 427.723 L 872 458.651 Z" id="Path 1" fill="url(#color-3)" style="transform-box: fill-box; transform-origin: 50% 50%;" />
+<path d="M836,430.25c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="Path 1" fill="url(#color-1)" />
+<path d="M836,469.75c-2.76142,0 -5,-2.68629 -5,-6v0c0,-3.31371 2.23858,-6 5,-6h23c2.76142,0 5,2.68629 5,6v0c0,3.31371 -2.23858,6 -5,6z" id="Path 1" fill="url(#color-2)" />
+
+
+@code {
+
+    public string seatColor = "#ffffff";
+
+    [Parameter]
+    public int seatNumber { get; set; }
+    [Parameter]
+    public EventCallback<int> OnSeatClick { get; set; }
+
+    private async Task HandleSeatClick()
+    {
+        if(seatColor=="#ffffff"){
+            seatColor = "#308a53";
+        }
+        else
+        {
+            seatColor = "#ffffff";
+        }
+        await OnSeatClick.InvokeAsync(seatNumber);
+
+    }
+
+}
