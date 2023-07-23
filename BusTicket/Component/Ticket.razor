@@ -1,0 +1,41 @@
+﻿@using BusTicket.Models;
+@using Microsoft.AspNetCore.Components;
+
+@*<RadzenCard Class="rz-my-2 rz-mx-auto rz-shadow-3 rz-border-radius-4" Style="width: 700px;height:300px">*@
+    <div class="bilet-container">
+        <div class="yolcu-bilgileri">
+            <h2>Yolcu Bilgileri</h2>
+            <p>Ad Soyad: @Ad @Soyad</p>
+            <p>Kalkış: Ankara</p>
+            <p>Varış: İzmir</p>
+            <p>Tarih: 2023-07-20</p>
+            <p>Koltuk No: @KoltukNo</p>
+        </div>
+        <div class="logo-container">
+            <div class="logo"></div>
+            <!-- Logo resmini ekleyebilirsiniz -->
+        </div>
+    </div>
+@*</RadzenCard>*@
+
+
+@code {
+
+
+    [Parameter]
+    public string Ad { get; set; }
+ 
+    [Parameter]
+    public string Soyad { get; set; }
+
+ 
+    [Parameter]
+    public string Tarih { get; set; }
+
+
+    [Parameter]
+    public int KoltukNo { get; set; }
+
+
+
+}

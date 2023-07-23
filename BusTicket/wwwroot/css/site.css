@@ -66,3 +66,39 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+
+/*    Ticket Componenti*/
+
+.bilet-container {
+    display: flex;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 650px;
+    height: 285px;
+    background-color: #fff;
+    background-image: url('../bus.jpg');
+}
+
+.yolcu-bilgileri {
+    flex: 1;
+    padding: 10px;
+}
+
+.logo-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+    background-color: #ccc;
+    border-radius: 10px;
+    /* Logo resmini burada stil ile ekleyebilirsiniz */
+}

@@ -513,35 +513,8 @@
                     <RadzenFieldset Text="Bilet Önizleme">
                         <RadzenStack Gap="1rem">
                            
-                                <RadzenCard Class="rz-my-2 rz-mx-auto rz-shadow-3 rz-border-radius-4" Style="width: 700px;height:300px">
-                                <RadzenColumn Size="8">
-                                    <h5>Berkay Turizm</h5>
                                 
-                               
-                                    <br />
-                                    <p><b>Yolcu Adı: </b> @yolcu.Ad</p>
-                                    <p><b>Yolcu Soyadı: </b>  @yolcu.Soyad</p>
-                                    <p>
-                                        <b>Cinsiyet: </b> @if (cinsiyet == 1)
-                                        {
-                                            <span>Erkek</span>
-                                        }else if((cinsiyet == 2)){
-                                            <span>Kadın</span>
-                                        }
-                                        else
-                                        {
-                                            <span> </span>
-                                        }
-                                    </p>
-                                    <p><b>Yolcu Doğum Tarihi: </b>  @yolcu.DogumTarihi.ToShortDateString()</p>
-                                    <p><b>Koltuk No: </b>  @selectedSeatNumber</p>
-
-                                </RadzenColumn>
-                                <RadzenColumn Size="4">
-                                    QR Code
-                                    </RadzenColumn>
-                            </RadzenCard>
-                            
+                            <Ticket Ad="@yolcu.Ad"  Soyad="@yolcu.Soyad" KoltukNo="@Convert.ToInt32(selectedSeatNumber)"  /> 
                         </RadzenStack>
                     </RadzenFieldset>
                 </RadzenStack>
@@ -574,8 +547,7 @@
             DogumTarihi = DateTime.Parse("16/07/2023"),
     };
 
-    string? ad;
-    string? soyad;
+ 
 
     void Submit(Yolcu arg)
     {
